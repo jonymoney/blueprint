@@ -58,7 +58,9 @@ module. Before analyzing:
    services, events, guards, env var reads, prisma models it touches, every
    import crossing its boundary.
 
-2. **Human-comprehension pass.** Produce, in chat:
+2. **Human-comprehension pass.** Produce, in chat AND saved to
+   `modules/<module>.docs.md` (companion doc for humans only — never an input
+   to generation; the spec stays the single source of truth):
    - A plain-language summary of what the module does.
    - Mermaid diagrams: one sequence diagram per endpoint (request flow through
      controller → service → prisma/providers/events), plus one dependency map
@@ -66,6 +68,8 @@ module. Before analyzing:
      it emits/listens to).
    - The module's env vars and its integration surface (guards/decorators,
      core/ interfaces, events).
+   - If the module has user-facing screens (e.g. onboarding), screenshots of
+     each screen in `modules/<module>.assets/`, embedded in the docs file.
 
 3. **HUMAN CHECKPOINT — before any parameterization.** Present every business
    rule as "when X then Y". Rules that are implicit in the code (not obviously
