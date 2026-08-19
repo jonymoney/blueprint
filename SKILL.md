@@ -86,6 +86,10 @@ module. Before analyzing:
    limit, split into sub-specs (`modules/<module>.<part>.md`), each
    independently generable and each ≤500 lines of output.
 
+6. **Update the catalog index.** Add (or refresh) the module's row in the
+   root README's **Catalog** table: name, one-line description, link to spec
+   and docs. A module isn't in the catalog until it's in the README.
+
 ## Verb 2: `blueprint <module>` — catalog → project
 
 Instantiate a catalog spec into the current project.

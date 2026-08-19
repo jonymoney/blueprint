@@ -10,6 +10,14 @@ both the skill and the catalog of parameterized module specs.
 - [modules/](modules/) — the catalog
 - [adr/](adr/) — decision records
 
+## Catalog
+
+| Module | What it is | Docs |
+|---|---|---|
+| [auth-backend](modules/auth-backend.md) | Passwordless invite-only auth for NestJS (Better Auth): email/SMS OTP, sliding Bearer sessions, allowlist gate, `AuthGuard`, OAuth 2.1 provider with instant revocation | [docs](modules/auth-backend.docs.md) |
+| [auth-ios](modules/auth-ios.md) | iOS client half of auth-backend: OTP sign-in screen, Keychain token storage, auto auth headers, session-death detection, clean sign-out | — |
+| [onboarding-ios](modules/onboarding-ios.md) | First-launch intro for iOS: parameterized screen sequence shown once, persisted completion flag, routing gate the app shell mounts before sign-in | — |
+
 ## How to use it
 
 ### Install (once)
