@@ -17,6 +17,7 @@ both the skill and the catalog of parameterized module specs.
 | [auth-backend](modules/auth-backend.md) | Passwordless invite-only auth for NestJS (Better Auth): email/SMS OTP, sliding Bearer sessions, allowlist gate, `AuthGuard`, OAuth 2.1 provider with instant revocation | [docs](modules/auth-backend.docs.md) |
 | [auth-ios](modules/auth-ios.md) | iOS client half of auth-backend: OTP sign-in screen, Keychain token storage, auto auth headers, session-death detection, clean sign-out | [docs](modules/auth-ios.docs.md) |
 | [onboarding-ios](modules/onboarding-ios.md) | First-launch intro for iOS: parameterized screen sequence shown once, persisted completion flag, routing gate the app shell mounts before sign-in | [docs](modules/onboarding-ios.docs.md) |
+| [footer-web](modules/footer-web.md) | "Built with ♥ from `<place>`" footer for React sites: places ticker whose slot width-animates to each name, fade-in entries, reduced-motion aware | [docs](modules/footer-web.docs.md) |
 
 ## How to use it
 
