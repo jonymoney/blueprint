@@ -4,7 +4,9 @@ description: >
   Spec-driven codegen framework. Specs are the source of truth; code is a
   regenerable artifact, generated one-shot per module. Use when the user says
   "blueprint <module>" (instantiate a catalog module into a project) or
-  "blueprint extract <module>" (turn existing code into a catalog spec).
+  "blueprint extract <module>" (turn existing code into a catalog spec),
+  "blueprint list" (list the catalog's modules), or "blueprint show <module>"
+  (load a module's spec into context so the AI knows how it's defined).
 ---
 
 # blueprint
@@ -14,7 +16,8 @@ catalog of parameterized module specs (`modules/`) governed by
 [CONSTITUTION.md](CONSTITUTION.md) and shaped by
 [SPEC_TEMPLATE.md](SPEC_TEMPLATE.md).
 
-Two verbs. Everything else is out of scope.
+Four verbs. Everything else is out of scope. `list`, `show` and `extract` are
+reserved words, never module names.
 
 ## How this runs
 
@@ -36,6 +39,8 @@ this skill's own directory (resolve the symlink):
   `<skill dir>/CONSTITUTION.md` and `<skill dir>/modules/<module>.md`, and
   writes only into the consuming project (specs/, src/modules/, env files).
   It never writes to this repo.
+- `blueprint list` and `blueprint show <module>` run anywhere and are
+  read-only: they read this repo and write nothing, anywhere.
 
 ---
 
@@ -127,9 +132,32 @@ Instantiate a catalog spec into the current project.
    - **Verification**: how to smoke-test the module end-to-end — curl
      examples taken from the spec's request→response examples.
 
+## Verb 3: `blueprint list` — what's in the catalog
+
+Print the root README's **Catalog** table as-is (module, one-liner, spec and
+docs links). The README is the index — a module isn't in the catalog until
+it's there — so don't rebuild the list from `modules/`.
+
+## Verb 4: `blueprint show <module>` — expose a spec to the AI
+
+Load a module's definition into this session so the AI can reason about it,
+answer questions, or use it as reference. Read-only.
+
+1. **Resolve the name** against the Catalog table. Exact match → go. Partial
+   or ambiguous (`auth` → auth-backend, auth-ios) → list the candidates and
+   ask. No match → say so and show `blueprint list`.
+
+2. **Read in full** `modules/<module>.md` plus any sub-specs
+   (`modules/<module>.<part>.md`, not `.docs.md`). The spec is the source of
+   truth; the `.docs.md` companion is for humans — read it only if asked.
+
+3. **Confirm briefly in chat**: what it is (one line), its Parameters,
+   integration surface, and env vars. Don't paste the spec back. The spec
+   stays in context for the rest of the session.
+
 ---
 
-## Ground rules (both verbs)
+## Ground rules (extract and generate)
 
 - The constitution is not negotiable at generation time. If a spec conflicts
   with it, the spec is wrong — stop and report.

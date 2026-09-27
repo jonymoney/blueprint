@@ -4,7 +4,7 @@ Spec-driven codegen framework for Claude Code. Specs are the source of truth;
 code is a regenerable artifact, generated one-shot per module. This repo is
 both the skill and the catalog of parameterized module specs.
 
-- [SKILL.md](SKILL.md) — the skill (two verbs, full flow)
+- [SKILL.md](SKILL.md) — the skill (four verbs, full flow)
 - [CONSTITUTION.md](CONSTITUTION.md) — immutable rules every module follows
 - [SPEC_TEMPLATE.md](SPEC_TEMPLATE.md) — the rigid spec format
 - [modules/](modules/) — the catalog
@@ -67,6 +67,24 @@ verifies the "compiled" criteria (tsc + lint + tests green, nothing touched
 outside the module) and always ends with a **handoff report**
 (`specs/<name>.handoff.md`): env vars you must set, pending integration
 steps, and curl examples to smoke-test.
+
+### Browse the catalog
+
+From any Claude Code session:
+
+```
+blueprint list
+```
+
+prints the Catalog table above.
+
+```
+blueprint show auth-backend
+```
+
+loads that module's full spec into the session so your AI knows exactly how
+it's defined — read-only, writes nothing. A partial name (`auth`) makes it ask
+which module you mean.
 
 ### Change the rules
 
